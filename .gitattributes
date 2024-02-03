@@ -1,1 +1,4 @@
-*.py linguist-language=True
+*.html linguist-language=True
+*.css linguist-language=True
+*.JavaScript linguist-language=True
+
