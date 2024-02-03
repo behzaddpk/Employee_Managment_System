@@ -1,0 +1,52 @@
+{% extends 'captain/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="bg-dash-dark-2 py-4">
+    <div class="container-fluid">
+        <h2 class="h5 mb-0">Applications</h2>
+    </div>
+</div>
+<div class="container-fluid py-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 py-3 px-0">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Application</li>
+        </ol>
+    </nav>
+</div>
+
+
+<div class="container mt-5">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="alert alert-success {{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-outline mb-4">
+            <label class="form-label form-floating" for="form4Example2">Application Subject</label>
+            <input type="text" id="form4Example2" name="subject" class="form-control" />
+        </div>
+        <div class="form-outline mb-4">
+            <label class="form-label form-floating" for="form4Example2">Date</label>
+            <input type="date" id="form4Example2" name="date" class="form-control" />
+        </div>
+        <!-- Message input -->
+        <div class="form-outline mb-4">
+            <label class="form-label form-floating" for="form4Example3">Application Body</label>
+            <textarea class="form-control" id="form4Example3" name="application" rows="16"></textarea>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary btn-block w-100">Send</button>
+        <input type="text" id="form4Example2" name="user_id" value="{{user.id}}" class="form-control" hidden/>
+
+    </form>
+</div>
+
+{% endblock content %}

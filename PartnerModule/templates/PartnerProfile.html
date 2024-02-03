@@ -1,0 +1,293 @@
+{% extends 'captain/base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+
+<div class="bg-dash-dark-2 py-4">
+  <div class="container-fluid">
+      <h2 class="h5 mb-0">Partner Profile</h2>
+  </div>
+</div>
+<div class="container-fluid py-2">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0 py-3 px-0">
+      <li class="breadcrumb-item"><a href="{% url 'Partners' %}">Partner List</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ partner.user.username | capfirst}} {{ partner.user.last_name | capfirst }}</li>
+    </ol>
+  </nav>
+</div>
+<!-- Form Elements -->
+<div class="col-lg-12 p-3">
+  <div class="card">
+    <div class="container my-5">
+      <div class="row">
+        <div class="col-sm-6 text-center align-center  ">
+
+            <img src="{{ photo.img.url }}" alt="photo" width="100%" class="img-fluid rounded-circle img-thumbnail"><br>
+            <!-- <p>{{bio.bio | safe }}</p> -->
+
+            <!-- Bio Formset Elements -->
+           <!-- <div> -->
+            <!-- <h5 class="mt-5">Bio </h5>
+            <form id="formset-form" method="post">
+              {% csrf_token %}
+              <div id="formset-container2">
+
+              </div>
+              <button type="button" class="btn btn-primary m-4" id="add-formset2">Add Bio</button>
+            </form>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script>
+              $(document).ready(function () {
+                // Initialize formset with initial form
+                const formsetContainer = $('#formset-container2');
+                const addFormsetButton = $('#add-formset2');
+
+                function addFormset() {
+                  const formsetIndex = formsetContainer.children('.formset').length;
+                  const formsetHTML = `
+                            <div class="formset card mb-3">
+                              <div class="card-body">
+                                  <div class="form-group">
+                                  {{ bio_formset.management_form }}
+                                  {% for form in bio_formset %}
+                                    
+                                      {{ form.as_p }}
+                                  {% endfor %}
+                                  {% comment %} <label for="id_formset-${formsetIndex}-field">Field ${formsetIndex + 1}:</label>
+                                  <input type="text" name="formset-${formsetIndex}-field" class="form-control" id="id_formset-${formsetIndex}-field"> {% endcomment %}
+                                </div>
+                                <button type="submit" class="btn btn-success m-4 block-inline">Submit</button>
+                                <button type="button" class="btn btn-danger mt-3" id="cancel-formset">Cancel</button>
+                                <input type='hidden' name='add_bio' value='2'>
+                              </div>
+                            </div>
+                          `; -->
+          <!-- //         formsetContainer.append(formsetHTML);
+
+          //         tinymce.init({
+          //           selector: '.tinymce',
+          //           height: 300,
+          //           // Add more configuration options as needed
+          //       });
+          //       }
+
+          //       addFormsetButton.click(function () {
+          //         addFormset();
+          //       });
+
+          //       formsetContainer.on('click', '#cancel-formset', function () {
+          //         $(this).closest('.formset').remove();
+          //       });
+          //     });
+          //   </script>
+          // </div>  -->
+          <!-- Button Elements -->
+
+
+          
+          <div style="margin-top: 50%;" class="new">
+            <form action='/add-to-cart' class='d-inline'>
+              <a href="" class="btn btn-warning shadow px-5 py-2 ms-4">Bank Detail </a>
+              <button type=submit class='btn btn-primary shadow px-5 py-2'>Order List</button>
+              <a href="" class="btn btn-danger ml-5 shadow mt-2 px-5 py-2 ms-4">Transaction</a>
+            </form>
+          </div>
+        </div>
+        <div class="col-sm-5 offset-sm-1">
+        <!-- Profile Elements -->
+          <h2>{{ partner.user.first_name | capfirst }} {{ partner.user.last_name | capfirst }} </h2>
+
+          <h5> ({{profile.tag}})</h5><br>
+
+          <h4>Designation : {{partner.user.get_designate_display}}</h4>
+          <h4>Team : {{partner.team_captain}}</h4>
+          <h6>Email Address: {{ partner.user.email | capfirst }}</h6>
+          <hr>
+          <h5>Contact NO: {{ profile.contact_no }} </h5> <br>
+          <h4>Bank Account NO: {{ bankdetail.AccountNO }}<small class=""></small></h4> <br>
+
+
+          <!-- Skill Formset Elements -->
+          <div>
+            <h5 class="mt-5">Skills</h5>
+            {% if request.user %}
+            {% for skill in skills %}
+            <ul>
+              <li>{{skill.skill}}</li>
+            </ul>
+            {% endfor %}
+            {% endif %}
+            <form id="formset-form" method="post">
+              {% csrf_token %}
+              <div id="formset-container">
+              </div>
+              <button type="button" class="btn btn-primary m-4" id="add-formset">Add Skill</button>
+              <button type="submit" class="btn btn-success m-4">Submit</button>
+            </form>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script>
+              $(document).ready(function () {
+                // Initialize formset with initial form
+                const formsetContainer = $('#formset-container');
+                const addFormsetButton = $('#add-formset');
+
+                function addFormset() {
+                  const formsetIndex = formsetContainer.children('.formset').length;
+                  const formsetHTML = `
+                            <div class="formset card mb-3">
+                              <div class="card-body">
+                                  <div class="form-group">
+                                  {{ skill_formset.management_form }}
+                                  {% for form in skill_formset %}
+                                      {{ form.as_table }}
+                                  {% endfor %}
+                                  {% comment %} <label for="id_formset-${formsetIndex}-field">Field ${formsetIndex + 1}:</label>
+                                  <input type="text" name="formset-${formsetIndex}-field" class="form-control" id="id_formset-${formsetIndex}-field"> {% endcomment %}
+                                </div>
+                                <button type="button" class="btn btn-danger mt-3" id="cancel-formset">Cancel</button>
+                                <input type='hidden' name='add_skill' value='1'>
+                              </div>
+                            </div>
+                          `;
+                  formsetContainer.append(formsetHTML);
+                }
+                addFormsetButton.click(function () {
+                  addFormset();
+                });
+                formsetContainer.on('click', '#cancel-formset', function () {
+                  $(this).closest('.formset').remove();
+                });
+              });
+            </script>
+          </div>
+
+
+          <!-- Experience Formset Elements -->
+          <div>
+            <h5 class="mt-5">Experienced </h5>
+            {% for experience in experiences %}
+            <ul>
+              <li>{{ experience.ExperiencedField | capfirst}}: for {{ experience.ExperiencedYear }} Years</li>
+            </ul>
+            {% endfor %}
+            <form id="formset-form" method="post">
+              {% csrf_token %}
+              <div id="formset-container1">
+
+              </div>
+              <button type="button" class="btn btn-primary m-4" id="add-formset1">Add Experience</button>
+              <button type="submit" class="btn btn-success m-4">Submit</button>
+            </form>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script>
+              $(document).ready(function () {
+                // Initialize formset with initial form
+                const formsetContainer = $('#formset-container1');
+                const addFormsetButton = $('#add-formset1');
+
+                function addFormset() {
+                  const formsetIndex = formsetContainer.children('.formset').length;
+                  const formsetHTML = `
+                            <div class="formset card mb-3">
+                              <div class="card-body">
+                                  <div class="form-group">
+                                  {{ experience_formset.management_form }}
+                                  {% for form in experience_formset %}
+                                      {{ form.as_table }}
+                                  {% endfor %}
+                                  {% comment %} <label for="id_formset-${formsetIndex}-field">Field ${formsetIndex + 1}:</label>
+                                  <input type="text" name="formset-${formsetIndex}-field" class="form-control" id="id_formset-${formsetIndex}-field"> {% endcomment %}
+                                </div>
+                                <button type="button" class="btn btn-danger mt-3" id="cancel-formset">Cancel</button>
+                                <input type='hidden' name='add_experience' value='1'>
+                              </div>
+                            </div>
+                          `;
+                  formsetContainer.append(formsetHTML);
+                }
+
+                addFormsetButton.click(function () {
+                  addFormset();
+                });
+
+                formsetContainer.on('click', '#cancel-formset', function () {
+                  $(this).closest('.formset').remove();
+                });
+              });
+            </script>
+          </div>
+
+
+          <!-- Education Formset Elements -->
+          <div>
+            <h5 class="mt-5">Education</h5>
+            {% if request.user %}
+            {% for education in educations %}
+            <ul>
+              <li>{{education.StudyIn}} in {{education.PassingYear}}</li>
+            </ul>
+            {% endfor %}
+            {% endif %}
+            <form id="formset-form" method="post">
+              {% csrf_token %}
+              <div id="education-formset-container">
+              </div>
+              <button type="button" class="btn btn-primary m-4" id="add-education-formset">Add Education</button>
+              <button type="submit" class="btn btn-success m-4">Submit</button>
+            </form>
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+            <script>
+              $(document).ready(function () {
+                // Initialize formset with initial form
+                const formsetContainer = $('#education-formset-container');
+                const addFormsetButton = $('#add-education-formset');
+
+                function addFormset() {
+                  const formsetIndex = formsetContainer.children('.formset').length;
+                  const formsetHTML = `
+                            <div class="formset card mb-3">
+                              <div class="card-body">
+                                  <div class="form-group">
+                                  {{ education_formset.management_form }}
+                                  {% for form in education_formset %}
+                                      {{ form.as_table }}
+                                  {% endfor %}
+                                  {% comment %} <label for="id_formset-${formsetIndex}-field">Field ${formsetIndex + 1}:</label>
+                                  <input type="text" name="formset-${formsetIndex}-field" class="form-control" id="id_formset-${formsetIndex}-field"> {% endcomment %}
+                                </div>
+                                <button type="button" class="btn btn-danger mt-3" id="cancel-formset">Cancel</button>
+                                <input type='hidden' name='add_education' value='1'>
+                              </div>
+                            </div>
+                          `;
+                  formsetContainer.append(formsetHTML);
+                }
+                addFormsetButton.click(function () {
+                  addFormset();
+                });
+                formsetContainer.on('click', '#cancel-formset', function () {
+                  $(this).closest('.formset').remove();
+                });
+              });
+            </script>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+{% endblock content %}

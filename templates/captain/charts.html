@@ -1,0 +1,95 @@
+{% extends 'captain/base.html' %}
+{% load static %}
+{% block title %} Flow Charts {% endblock title %}
+
+
+{% block content %}
+      <div class="page-content">
+            <!-- Page Header-->
+            <div class="bg-dash-dark-2 py-4">
+              <div class="container-fluid">
+                <h2 class="h5 mb-0">Charts</h2>
+              </div>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="container-fluid py-2">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 py-3 px-0">
+                  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Charts</li>
+                </ol>
+              </nav>
+            </div>
+        <section class="pt-0">
+          <div class="container-fluid">
+            <div class="row gy-4">
+              <div class="col-lg-8">
+                <div class="card">
+                  <div class="card-body"><strong>Line Chart Example</strong>
+                    <canvas id="lineChartCustom1"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">       
+                <div class="card">
+                  <div class="card-body"><strong>Line Chart Example</strong>
+                    <canvas id="lineChartCustom2"></canvas>
+                  </div>
+                </div>
+                <div class="card">                                   
+                  <div class="card-body">
+                    <canvas id="lineChartCustom3"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card">
+                  <div class="card-body"><strong>Bar Chart Example</strong>
+                    <canvas id="barChartCustom1"></canvas>
+                  </div>
+                </div>
+                <div class="card">                                   
+                  <div class="card-body">
+                    <canvas id="barChartCustom2"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-8">
+                <div class="card">
+                  <div class="card-body"><strong>Bar Chart Example</strong>
+                    <canvas id="barChartCustom3"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body"><strong>Pie Chart Example</strong>
+                    <canvas id="pieChartCustom1"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body"><strong>Pie Chart Example</strong>
+                    <canvas id="doughnutChartCustom1"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body"><strong>Polar Chart Example</strong>
+                    <canvas id="polarChartCustom"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="card">
+                  <div class="card-body"><strong>Radar Chart Example</strong>
+                    <canvas id="radarChartCustom"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+       {% endblock content %}

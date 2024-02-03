@@ -1,0 +1,94 @@
+{% load static %}
+{% load active_link_tags %}
+
+</div><span class="text-uppercase text-gray-600 text-xs mx-3 px-2 heading mb-2">Main</span>
+<ul class="list-unstyled">
+  <li class="sidebar-item {% active_link 'dashboard' 'active' %}"><a class="sidebar-link"
+      href="{% url 'dashboard' %}">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#real-estate-1"> </use>
+      </svg><span>Dashboard</span></a></li>
+
+
+  <li class="sidebar-item {% active_link 'StaffRegistration' 'active' %} {% active_link 'Partners' 'active' %}"><a
+      class="sidebar-link" href="#PartnerdropdownDropdown1" data-bs-toggle="collapse">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#browser-window-1"> </use>
+      </svg><span>Staff Module</span></a>
+    <ul class="collapse list-unstyled " id="PartnerdropdownDropdown1">
+      <li><a class="sidebar-link" href="{% url 'StaffRegistration' %}">Add Staff</a></li>
+      <li><a class="sidebar-link" href="{% url 'Partners' %}">Partner</a></li>
+      <li><a class="sidebar-link" href="{% url 'CoordinatorList' %}">CoOrdinator</a></li>
+
+    </ul>
+  </li>
+
+  <li class="sidebar-item {% active_link 'clients' 'active' %}"><a class="sidebar-link"
+      href="#exampledropdownDropdown1" data-bs-toggle="collapse">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#browser-window-1"> </use>
+      </svg><span>Clients</span></a>
+    <ul class="collapse list-unstyled " id="exampledropdownDropdown1">
+      <li><a class="sidebar-link" href="{% url 'clients' %}">Clients List</a></li>
+      {% comment %} <li><a class="sidebar-link" href="{% url 'tasks' %}">Cl</a></li>
+      <li><a class="sidebar-link" href="#">Staff Evaluation</a></li> {% endcomment %}
+    </ul>
+  </li>
+  <li class="sidebar-item {% active_link 'TeamMembers' 'active' %}"><a class="sidebar-link"
+      href="#exampledropdownDropdown2" data-bs-toggle="collapse">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#browser-window-1"> </use>
+      </svg><span>Team Module</span></a>
+    <ul class="collapse list-unstyled " id="exampledropdownDropdown2">
+      <li><a class="sidebar-link" href="{% url 'TeamMembers' %}">Team Member</a></li>
+      <!-- <li><a class="sidebar-link" href="#">Staff Evaluation</a></li> -->
+    </ul>
+  </li>
+  <li class="sidebar-item {% active_link 'AddTask' 'active' %} {% active_link 'Tasklist' 'active' %}"><a
+      class="sidebar-link" href="#exampledropdownDropdownTask" data-bs-toggle="collapse">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#browser-window-1"> </use>
+      </svg><span>Task Module</span></a>
+    <ul class="collapse list-unstyled " id="exampledropdownDropdownTask">
+      <li><a class="sidebar-link" href="{% url 'AddTask' %}">Add Tasks</a></li>
+      <li><a class="sidebar-link" href="{% url 'Tasklist' %}">Tasks</a></li>
+    </ul>
+  </li>
+  <li class="sidebar-item {% active_link 'Evaluation' 'active' %} {% active_link 'MemberEvaluations' 'active' %}"><a
+      class="sidebar-link" href="#exampledropdownDropdownEvaluation" data-bs-toggle="collapse">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#security-shield-1"> </use>
+      </svg><span>Evaluation</span></a>
+    <ul class="collapse list-unstyled " id="exampledropdownDropdownEvaluation">
+      <li><a class="sidebar-link" href="{% url 'Evaluation' %}">Evaluation</a></li>
+      <li><a class="sidebar-link" href="{% url 'MemberEvaluations' %}">Member Evaluation</a></li>
+    </ul>
+  </li>
+  <li class="sidebar-item {% active_link 'AnnouncementForms' 'active' %} {% active_link 'Announcements' 'active' %}">
+    <a class="sidebar-link" href="#exampledropdownDropdownAnnoucments" data-bs-toggle="collapse">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#quality-1"> </use>
+      </svg><span>Annoucments</span></a>
+    <ul class="collapse list-unstyled " id="exampledropdownDropdownAnnoucments">
+      <li><a class="sidebar-link" href="{% url 'AnnouncementForms' %}">Make Annoucments</a></li>
+      <li><a class="sidebar-link" href="{% url 'Announcements' %}">Announcements</a></li>
+    </ul>
+  </li>
+  <li class="sidebar-item"><a class="sidebar-link" href="{% url 'tables' %}">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#portfolio-grid-1"> </use>
+      </svg><span>Tables </span></a></li>
+  <li class="sidebar-item"><a class="sidebar-link" href="{% url 'charts' %}">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#sales-up-1"> </use>
+      </svg><span>Charts </span></a></li>
+  {% comment %} <li class="sidebar-item"><a class="sidebar-link" href="{% url 'forms' %}">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#survey-1"> </use>
+      </svg><span>Forms </span></a></li>
+  {% endcomment %}
+  {% comment %} <li class="sidebar-item"><a class="sidebar-link" href="{% url 'login' %}">
+      <svg class="svg-icon svg-icon-sm svg-icon-heavy">
+        <use xlink:href="#disable-1"> </use>
+      </svg><span>Login page </span></a></li> {% endcomment %}
+</ul>

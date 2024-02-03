@@ -1,0 +1,60 @@
+{% extends 'captain/base.html' %}
+{% load static %}
+{% block title %} Partner Registeration Form {% endblock title %}
+
+
+{% block content %}
+      <div class="page-content form-page">
+            <!-- Page Header-->
+            <div class="bg-dash-dark-2 py-4">
+              <div class="container-fluid">
+                <h2 class="h5 mb-0">Register</h2>
+              </div>
+            </div>
+            <!-- Breadcrumb-->
+            <div class="container-fluid py-2">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0 py-3 px-0">
+                  <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Staff Registration </li>
+                </ol>
+              </nav>
+            </div>
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+                    
+            <div class="align-items-center col-lg-9 px-5">
+              <div class="d-flex align-items-center px-4 px-lg-5 h-100 bg-dash-dark-2">
+                <form class="register-form py-5 w-100" method="POST" action="{% url 'StaffRegistration' %}" enctype="multipart/form-data">
+                  {% csrf_token %}  
+                  
+                    {% for field in form %}
+                      <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                          <small class="form-text text-muted">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% if field.errors %}
+                          <div class="invalid-feedback">
+                            {% for error in field.errors %}
+                              <span>{{ error }}</span>
+                            {% endfor %}
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  
+                  
+                
+                  <button class="btn btn-primary mt-2" id="login" type="submit">Register</button><br><small class="text-gray-500">Already have an account?  </small><a class="text-sm text-paleBlue" href="login.html">Login</a>
+                </form>
+              </div>
+            </div>
+        {% endblock content %}

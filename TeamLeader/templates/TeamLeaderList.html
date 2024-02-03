@@ -1,0 +1,72 @@
+{% extends 'captain/base.html' %}
+{% load static %}
+
+{% block title %} Partner {% endblock title %}
+
+{% block content %}
+<div class="bg-dash-dark-2 py-4">
+    <div class="container-fluid">
+        <h2 class="h5 mb-0">Team Leader List</h2>
+    </div>
+</div>
+<div class="container-fluid py-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 py-3 px-0">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Team Leaders</li>
+        </ol>
+    </nav>
+</div>
+<section class="pt-10">
+    <div class="container-fluid">
+        <div class="row gy-4">
+            {% for leader in teamleader %}
+            {% if leader.is_verified %}
+            <div class="col-lg-4">
+                <form>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                {% with leader_photo=leader.teamleaderphoto_set.first %}
+                                    {% if leader_photo %}
+                                        <div class="position-relative d-inline-block">
+                                            <img class="avatar avatar-lg mb-3" src="{{ leader_photo.img.url }}" alt="Leader Photo">
+                                            <span class="avatar-badge bg-dash-color-1">1st</span>
+                                        </div><br>
+                                    {% else %}
+                                        <div class="position-relative d-inline-block">
+                                            <img class="avatar avatar-lg mb-3" src="{% static 'path_to_default_photo' %}" alt="Default Photo">
+                                            <span class="avatar-badge bg-dash-color-1">1st</span>
+                                        </div><br>
+                                    {% endif %}
+                                {% endwith %}
+                                <a href="{% url 'TeamLeaderProfile' leader.user.slug %}">
+                                    <h3 class="h5 mb-0">{{leader.user.first_name | capfirst}} {{leader.user.last_name | capfirst}}
+                                        </h3>
+                                </a>
+                                <p class="text-sm fw-light">{{leader.user.email}}</p>
+                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">
+                                    950
+                                    Contributions</div>
+                                <ul class="list-inline text-center mb-0 d-flex justify-content-between text-sm mb-0">
+                                    <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>150</li>
+                                    <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>340</li>
+                                    <li class="list-inline-item"><i class="fab fa-gg me-2"></i>460</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <!-- {% if leader.is_verified == True %}
+
+
+            
+            {% endif %} -->
+            
+        </div>
+    </div>
+</section>
+{% endblock content %}

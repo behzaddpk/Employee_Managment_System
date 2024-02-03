@@ -1,0 +1,96 @@
+{% extends 'captain/base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    table .total {
+        background: red;
+    }
+
+    table th {
+        font-size: 13px;
+        height:20px;
+    }
+
+    table tr {
+        font-size: 14px
+    }
+</style>
+
+<div class="form-content">
+    <!-- Page Header-->
+    <div class="bg-dash-dark-2 py-4">
+        <div class="container-fluid">
+            <h2 class="h5 mb-0">Evaluation Page</h2>
+        </div>
+    </div>
+    <!-- Breadcrumb-->
+    <div class="container-fluid py-2">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 py-3 px-0">
+                <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Evaluation Table </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div style="margin-bottom: 20px;" class="align-items-center col-lg-12 px-3 mb-5">
+    {% for team in teams %}
+    <div class="card" style="overflow: auto; width:95%; margin-bottom: 30px;" >
+        <h1 class="text-center text-white" style="background-color: #db6574;position: sticky;
+        top: 0;
+        left: 0;">{{ team.team_name | capfirst }}</h1>
+        <table style="width:100%;" class="table table-bordered table-dark table-hover table-striped">
+            <thead style="line-height:14px; vertical-align:middle;">
+                <tr>
+                    <!-- <th style="background:orange;">Team</th> -->
+                    <th style="background:blue;">Member</th>
+                    <th>Punctuality & Response Time + In  & Out</th>
+                    <th>Team Spirit + Attitude and Behavior</th>
+                    <th>Cancellations/Quiz&exam performance</th>
+                    <th>Formatting & Referencing / Language Grip for IT</th>
+                    <th>Content Flow & Quality / Logics and Structure</th>
+                    <th>Understanding Instructions</th>
+                    <th>Expertise in Technical Subjects / Advancement in Language</th>
+                    <th>Focused on New Learnings</th>
+                    <th>Planning & Management</th>
+                    <th>Plagiarism / ChatGPT or AI Tools / Flawed Language for IT/Coursework Missed</th>
+                    <th class="total" style="color:yellow;">Total</th>
+                    <th style="color:white; background:green;">Max Possible</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for staff in staffs %}
+                {% if staff.member.team == team %}
+                <tr>
+                    <!-- <td>{{ staff.member.team.team_name }}</td> -->
+                    <td>
+                        {% if staff.member %}
+                            <a href="{% url 'MemberProfile' staff.member.slug %}">{{staff.member.name | capfirst }}</a>
+                        {% endif %} 
+                    </td>
+                    <!-- <td class="member font-weight-bold"><a href="{% url 'MemberProfile' staff.member.slug %}">{{ staff.member.name }}</a></td> -->
+                    <td>{{ staff.Punctuality | floatformat:2 }}</td>
+                    <td>{{ staff.Attitude | floatformat:2 }}</td>
+                    <td>{{ staff.Performance | floatformat:2 }}</td>
+                    <td>{{ staff.Utilities | floatformat:2 }}</td>
+                    <td>{{ staff.Formatiing | floatformat:2 }}</td>
+                    <td>{{ staff.Quality | floatformat:2 }}</td>
+                    <td>{{ staff.Expertise | floatformat:2 }}</td>
+                    <td>{{ staff.New_Learning | floatformat:2 }}</td>
+                    <td>{{ staff.Planning | floatformat:2 }}</td>
+                    <td>{{ staff.AI_Flowed | floatformat:2 }}</td>
+                    <td style="color:yellow;">{{ staff.allsum | floatformat:2 }}</td>
+                    <td style="color:yellow;" class="text-center">36</td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endblock content %}

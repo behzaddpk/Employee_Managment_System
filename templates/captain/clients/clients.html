@@ -1,0 +1,183 @@
+{% extends 'captain/base.html' %}
+{% load static %}
+
+{% block title %} Clients {% endblock title %}
+
+{% block content %}
+<div class="bg-dash-dark-2 py-4">
+    <div class="container-fluid">
+        <h2 class="h5 mb-0">Clients List</h2>
+    </div>
+</div>
+<div class="container-fluid py-2">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0 py-3 px-0">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Client</li>
+      </ol>
+    </nav>
+  </div>
+<section class="pt-10">
+    <div class="container-fluid">
+        <div class="row gy-4">
+            {% for client in clients %}
+            <div class="col-lg-4">
+                <!-- User block-->
+                
+                <form >
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="position-relative d-inline-block"><img class="avatar avatar-lg mb-3"
+                                        src="{{ client.img.url }}" alt="Richard Nevoreski"><span
+                                        class="avatar-badge bg-dash-color-1">1st</span></div><br>
+                                <a href='{% url 'client-profile' client.slug %}'><h3 class="h5 mb-0">{{ client.Full_name | capfirst }}</h3></a>
+                                <p class="text-sm fw-light">{{client.email}}</p>
+                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">950
+                                    Contributions</div>
+                                <ul class="list-inline text-center mb-0 d-flex justify-content-between text-sm mb-0">
+                                    <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>150</li>
+                                    <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>340</li>
+                                    <li class="list-inline-item"><i class="fab fa-gg me-2"></i>460</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
+            </div>
+            {% endfor %}
+            {% comment %} <div class="col-lg-4">
+                <!-- User block-->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <div class="position-relative d-inline-block"><img class="avatar avatar-lg mb-3"
+                                    src="{% static 'img/avatar-4.jpg' %}" alt="Samuel Watson"><span
+                                    class="avatar-badge bg-dash-color-2">2nd</span></div>
+                            <h3 class="h5 mb-0">Samuel Watson</h3>
+                            <p class="text-sm fw-light">@samwatson</p>
+                            <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">772
+                                Contributions</div>
+                            <ul class="list-inline text-center mb-0 d-flex justify-content-between text-sm mb-0">
+                                <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>80</li>
+                                <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>420</li>
+                                <li class="list-inline-item"><i class="fab fa-gg me-2"></i>272</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <!-- User block-->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center">
+                            <div class="position-relative d-inline-block"><img class="avatar avatar-lg mb-3"
+                                    src="{% static 'img/avatar-6.jpg' %}" alt="Sebastian Wood"><span
+                                    class="avatar-badge bg-dash-color-3">3rd</span></div>
+                            <h3 class="h5 mb-0">Sebastian Wood</h3>
+                            <p class="text-sm fw-light">@sebastian</p>
+                            <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">620
+                                Contributions</div>
+                            <ul class="list-inline text-center mb-0 d-flex justify-content-between text-sm mb-0">
+                                <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>150</li>
+                                <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>280</li>
+                                <li class="list-inline-item"><i class="fab fa-gg me-2"></i>190</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row gy-3 align-items-center">
+                            <div class="col-lg-4">
+                                <div class="d-flex align-items-center"><strong
+                                        class="text-sm d-none d-lg-block">4th</strong><img class="avatar ms-3"
+                                        src="{% static 'img/avatar-1.jpg' %}" alt="Tomas Hecktor">
+                                    <div class="ms-3">
+                                        <h3 class="h5 mb-0">Tomas Hecktor</h3>
+                                        <p class="text-sm fw-light mb-0">@tomhecktor</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm">410
+                                    Contributions</div>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="list-inline text-center mb-0 d-flex justify-content-between mb-0 text-sm">
+                                    <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>110</li>
+                                    <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>200</li>
+                                    <li class="list-inline-item"><i class="fab fa-gg me-2"></i>100</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row gy-3 align-items-center">
+                            <div class="col-lg-4">
+                                <div class="d-flex align-items-center"><strong
+                                        class="text-sm d-none d-lg-block">5th</strong><img class="avatar ms-3"
+                                        src="{% static 'img/avatar-2.jpg' %}" alt="Alexander Shelby">
+                                    <div class="ms-3">
+                                        <h3 class="h5 mb-0">Alexander Shelby</h3>
+                                        <p class="text-sm fw-light mb-0">@alexshelby</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm">320
+                                    Contributions</div>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="list-inline text-center mb-0 d-flex justify-content-between mb-0 text-sm">
+                                    <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>150</li>
+                                    <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>120</li>
+                                    <li class="list-inline-item"><i class="fab fa-gg me-2"></i>50</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row gy-3 align-items-center">
+                            <div class="col-lg-4">
+                                <div class="d-flex align-items-center"><strong
+                                        class="text-sm d-none d-lg-block">6th</strong><img class="avatar ms-3"
+                                        src="{% static 'img/avatar-6.jpg' %}" alt="Arther Kooper">
+                                    <div class="ms-3">
+                                        <h3 class="h5 mb-0">Arther Kooper</h3>
+                                        <p class="text-sm fw-light mb-0">@artherkooper</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 text-center">
+                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm">170
+                                    Contributions</div>
+                            </div>
+                            <div class="col-lg-4">
+                                <ul class="list-inline text-center mb-0 d-flex justify-content-between mb-0 text-sm">
+                                    <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>60</li>
+                                    <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>70</li>
+                                    <li class="list-inline-item"><i class="fab fa-gg me-2"></i>40</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="{% url 'add-client' %}" class="btn btn-primary shadow px-5 py-2 ms-4">Add New Client</a>
+        </div>
+    </div>
+</section>
+{% endblock content %}

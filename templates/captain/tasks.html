@@ -1,0 +1,177 @@
+{% extends 'captain/base.html' %}
+{% load static %}
+{% block title %} Tasks {% endblock title %}
+
+
+{% block content %}
+<div class="page-content form-page">
+  <!-- Page Header-->
+  <div class="bg-dash-dark-2 py-4">
+    <div class="container-fluid">
+      <h2 class="h5 mb-0">Task</h2>
+    </div>
+  </div>
+  <!-- Breadcrumb-->
+  <div class="container-fluid py-2">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0 py-3 px-0">
+        <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Task</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- Forms Section-->
+  <section class="pt-0">
+    <div class="container-fluid">
+      <div class="row gy-4">
+        <!-- Basic Form-->
+
+
+
+        <!-- Modal Form-->
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="mb-0">Task Category</h3>
+            </div>
+            <div class="card-body pt-0 text-center">
+              <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                data-bs-target="#myTaskCategoryModal">Add Task Category</button>
+              <!-- Modal-->
+              <div class="modal fade text-start" id="myTaskCategoryModal" tabindex="-1"
+                aria-labelledby="myTaskCategoryModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="myTaskCategoryModalLabel">Task Category</h5>
+                      <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- <p>Lorem ipsum dolor sit amet consectetur.</p> -->
+                      <form method='POST'>
+                        {% csrf_token %}
+                        {{ TaskCategoryform.as_p }}
+                        <div class="modal-footer">
+                          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                          <button class="btn btn-primary" type="submit">Save changes</button>
+                          <input type='hidden' name='add_task' value='1'>
+
+                        </div>
+                      </form>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Institution Name Modal Form-->
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="mb-0">Institution Name</h3>
+            </div>
+            <div class="card-body pt-0 text-center">
+              <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                data-bs-target="#myInstitutionModal">Add Institution Name</button>
+              <!-- Modal-->
+              <div class="modal fade text-start" id="myInstitutionModal" tabindex="-1"
+                aria-labelledby="myInstitutionModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="myInstitutionModalLabel">Institution Name</h5>
+                      <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- <p>Lorem ipsum dolor sit amet consectetur.</p> -->
+                      <form method='POST'>
+                        {% csrf_token %}
+                        {{ InstitutionNameform.as_p }}
+                        <div class="modal-footer">
+                          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                          <button class="btn btn-primary" type="submit">Save changes</button>
+                          <input type='hidden' name='add_institution' value='1'>
+
+                        </div>
+                      </form>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Assesstment Type Modal Form-->
+        <div class="col-lg-4">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="mb-0">Assesstment Type</h3>
+            </div>
+            <div class="card-body pt-0 text-center">
+              <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                data-bs-target="#myAssesstmentModal">Add Assesstment</button>
+              <!-- Modal-->
+              <div class="modal fade text-start" id="myAssesstmentModal" tabindex="-1"
+                aria-labelledby="myAssesstmentModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="myAssesstmentModalLabel">Assesstment</h5>
+                      <button class="btn-close btn-close-white" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <!-- <p>Lorem ipsum dolor sit amet consectetur.</p> -->
+                      <form method='POST'>
+                        {% csrf_token %}
+                        {{ AssessmentTypeform.as_p }}
+                        <div class="modal-footer">
+                          <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Close</button>
+                          <button class="btn btn-primary" type="submit">Save changes</button>
+                          <input type='hidden' name='add_assesstment' value='1'>
+
+                        </div>
+                      </form>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- Form Elements -->
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="h4 mb-0">Add Task</h3>
+            </div>
+            <div class="card-body pt-0">
+              <form class="form-horizontal" method='POST' enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ TaskDetailform.as_table }}
+
+                <button class="btn btn-primary" type="submit">Save changes</button>
+                <input type='hidden' name='add_tasks' value='1'>
+
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endblock content%}

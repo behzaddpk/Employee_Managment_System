@@ -1,0 +1,139 @@
+{% extends "captain/base.html" %}
+
+{% block content %}
+<div class="bg-dash-dark-2 py-4">
+  <div class="container-fluid">
+    <h2 class="h5 mb-0">Task Details</h2>
+  </div>
+</div>
+<div class="container-fluid py-2">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb mb-0 py-3 px-0">
+      <li class="breadcrumb-item"><a href="{% url 'Tasklist' %}">Task List</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ task.task_name }}</li>
+    </ol>
+  </nav>
+</div>
+
+
+
+<div class="p-3">
+  <div class="card" style="width: 86%; overflow: auto;">
+    <table class="table table-hover table-dark table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">Task Heads</th>
+          <th scope="col">Task Discription</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Task ID</th>
+          <td>{{task.id}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Task Name</th>
+          <td>
+            {{task.task_name}}
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">Clients</th>
+          <td>
+            {% if task.client %}
+            <a href="{% url 'client-profile' task.client.slug %}">{{task.client | capfirst }}</a>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">Task Category</th>
+          <td>{{task.task_category}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Institution Name</th>
+          <td>{{task.institution_name}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Course Code</th>
+          <td>{{task.course_code}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Deadline</th>
+          <td>{{task.deadline}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Word Count</th>
+          <td>{{task.word_count}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Assessment Type</th>
+          <td>{{task.assessment_type}}</td>
+        </tr>
+        <tr>
+          <th scope="col">Attachment File</th>
+          <td>
+            {% if task.attachment_file %}
+            <a href="{{ task.attachment_file.url }}" download>{{ task.attachment_file.name }}</a>
+            {% else %}
+            No attachment
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">Send To</th>
+          <td>
+            {% if task.send_to %}
+            <a href="{% url 'MemberProfile' task.send_to.user.slug %}">{{task.send_to | capfirst }}</a>
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <th scope="col">Task Status</th>
+          <td>
+            {{task.task_status}}
+            {% if task.task_status == 'Accepted' %}
+            <div class='progress'>
+              <div class='progress-bar' role='progressbar' style='width:20%' aria-valuenow='20' aria-valuemin='0'
+                aria-valuemax='100'>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if task.task_status == 'Do Able' %}
+            <div class='progress'>
+              <div class='progress-bar bg-success' role='progressbar' style='width:40%' aria-valuenow='40'
+                aria-valuemin='0' aria-valuemax='100'>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if task.task_status == 'Cancel' %}
+            <div class='progress'>
+              <div class='progress-bar bg-danger' role='progressbar' style='width:70%' aria-valuenow='70'
+                aria-valuemin='0' aria-valuemax='100'>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if task.task_status == 'Working' %}
+            <div class='progress'>
+              <div class='progress-bar bg-info' role='progressbar' style='width:100%' aria-valuenow='100'
+                aria-valuemin='0' aria-valuemax='100'>
+              </div>
+            </div>
+            {% endif %}
+
+            {% if task.task_status == 'Delivered' %}
+            <div class='progress'>
+              <div class='progress-bar bg-success' role='progressbar' style='width:100%' aria-valuenow='100'
+                aria-valuemin='0' aria-valuemax='100'>
+              </div>
+            </div>
+            {% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+    {% endblock %}

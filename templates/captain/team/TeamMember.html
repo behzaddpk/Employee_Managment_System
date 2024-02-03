@@ -1,0 +1,215 @@
+{% extends 'captain/base.html' %}
+{% load static %}
+
+
+
+{% block title %} Staff List {% endblock title %}
+
+{% block content %}
+<style>
+    .card-body .bg-dash-dark-3 {
+        background: #22252a;
+        transition: .2s;
+        cursor: pointer;
+    }
+
+    .card-body .bg-dash-dark-3:hover {
+        background: white !important;
+        color: black;
+        font-weight: bold;
+        box-shadow: 3px 3px 2px black;
+    }
+</style>
+<div class="bg-dash-dark-2 py-4">
+    <div class="container-fluid">
+        <h2 class="h5 mb-0">Members List</h2>
+    </div>
+</div>
+<div class="container-fluid py-2">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb mb-0 py-3 px-0">
+            <li class="breadcrumb-item"><a href="{% url 'dashboard' %}">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Staff</li>
+        </ol>
+    </nav>
+</div>
+<section class="pt-10 container-fluid">
+                <div class="row gy-4">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <select class="form-select form-select-lg mb-5" aria-label=".form-select-lg example" name="filter_option" onchange="this.form.submit()">
+                            <option selected>Filter by</option>
+                            <option value="team" {% if request.POST.filter_option == 'team' %}selected{% endif %}>Team</option>
+                            <option value="all" {% if request.POST.filter_option == 'all' %}selected{% endif %}>All</option>
+                        </select>
+                        <div class="col-lg-12 d-flex mb-1">
+                            <input type="search" class="form-control" name="searchmember" value="{{ request.GET.searchmember }}" placeholder="Search Member">
+                            <button type="submit" class="btn btn-info border-none">Search</button>
+                        </div>
+                    </form>
+                    {% if request.POST.filter_option == 'team' %}
+                        {% for team, members in groups.items %}
+                            <div class="col-lg-12">
+                                <h2 class="text-center">{{ team }}</h2>
+                            </div>
+                            {% for member in members %}
+                            <div class="col-lg-4">
+                                <form>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                {% with member_photo=member.memberphoto_set.first %}
+                                                {% if member_photo %}
+                                                <div class="position-relative d-inline-block">
+                                                    <img class="avatar avatar-lg mb-3" src="{{ member_photo.img.url }}"
+                                                        alt="Partner Photo">
+                                                    <span class="avatar-badge bg-dash-color-1">1st</span>
+                                                </div><br>
+                                                {% else %}
+                                                <div class="position-relative d-inline-block"><img class="avatar avatar-lg mb-3"
+                                                        src="{{ photo.img.url }}" alt="Richard Nevoreski"><span
+                                                        class="avatar-badge bg-dash-color-1">1st</span></div><br>
+                                                {% endif %}
+                                                {% endwith %}
+                                                <a href='{% url 'MemberProfile' member.user.slug %}'>
+                                                    <h3 class="h5 mb-0">{{ member.user.first_name | capfirst }} {{ member.user.last_name | capfirst }}</h3>
+                                                </a>
+                                                <p class="text-sm fw-light">{{ member.user.email }}</p>
+                                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">
+                                                    {{ member.user.get_designate_display }}</div>
+                                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">
+                                                    {{ member.team }}</div>
+                                                <ul class="list-inline text-center mb-0 d-flex justify-content-between text-sm mb-0">
+                                                    <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>150</li>
+                                                    <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>340</li>
+                                                    <li class="list-inline-item"><i class="fab fa-gg me-2"></i>460</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            {% endfor %}
+                            
+                        {% endfor %}
+                    {% else %}
+                        {% for member in members %}
+                            <div class="col-lg-4">
+                                <form>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                {% with member_photo=member.memberphoto_set.first %}
+                                                {% if member_photo %}
+                                                <div class="position-relative d-inline-block">
+                                                    <img class="avatar avatar-lg mb-3" src="{{ member_photo.img.url }}"
+                                                        alt="Partner Photo">
+                                                    <span class="avatar-badge bg-dash-color-1">1st</span>
+                                                </div><br>
+                                                {% else %}
+                                                <div class="position-relative d-inline-block"><img class="avatar avatar-lg mb-3"
+                                                        src="{{ photo.img.url }}" alt="Richard Nevoreski"><span
+                                                        class="avatar-badge bg-dash-color-1">1st</span></div><br>
+                                                {% endif %}
+                                                {% endwith %}
+                                                <a href='{% url 'MemberProfile' member.user.slug %}'>
+                                                    <h3 class="h5 mb-0">{{ member.user.first_name | capfirst }} {{ member.user.last_name | capfirst }}</h3>
+                                                </a>
+                                                <p class="text-sm fw-light">{{ member.user.email }}</p>
+                                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">
+                                                    {{ member.user.Designate }}</div>
+                                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">
+                                                    {{ member.team }}</div>
+                                                <ul class="list-inline text-center mb-0 d-flex justify-content-between text-sm mb-0">
+                                                    <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>150</li>
+                                                    <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>340</li>
+                                                    <li class="list-inline-item"><i class="fab fa-gg me-2"></i>460</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
+                {% comment %} chat code {% endcomment %}
+                
+                {% comment %} chat code {% endcomment %}
+            
+
+            {% comment %} {% if request.GET.filter_option == 'team' %}
+            {% for member in members %}
+            <div class="col-lg-12">
+                <h2>{{ member.team }}</h2>
+            </div>
+            <div class="col-lg-4">
+                <form>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="position-relative d-inline-block">
+                                    <img class="avatar avatar-lg mb-3" src="{{ image.img.url }}"
+                                        alt="Richard Nevoreski">
+                                    <span class="avatar-badge bg-dash-color-1">{{ forloop.counter }}</span>
+                                </div><br>
+                                <a href='{% url ' MemberProfile' member.slug %}'>
+                                    <h3 class="h5 mb-0">{{ member.username | capfirst }}</h3>
+                                </a>
+                                <p class="text-sm fw-light">{{ member.email }}</p>
+                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">
+                                    {{ member.designation }}</div>
+                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">
+                                    {{ member.team }}</div>
+                                <ul class="list-inline text-center mb-0 d-flex justify-content-between text-sm mb-0">
+                                    <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>150</li>
+                                    <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>340</li>
+                                    <li class="list-inline-item"><i class="fab fa-gg me-2"></i>460</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            {% endfor %}
+
+            {% else %}
+            {% for member in members %}
+            <div class="col-lg-4">
+                <form>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="position-relative d-inline-block"><img class="avatar avatar-lg mb-3"
+                                        src="{{ image.img.url }}" alt="Richard Nevoreski"><span
+                                        class="avatar-badge bg-dash-color-1">{{ forloop.counter }}</span></div><br>
+                                <a href='{% url ' MemberProfile' member.user.slug %}'>
+                                    <h3 class="h5 mb-0">{{member.username | capfirst}}</h3>
+                                </a>
+                                <p class="text-sm fw-light">{{member.email}}</p>
+                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">
+                                    {{member.designation}}</div>
+                                <div class="d-inline-block py-1 px-4 rounded-pill bg-dash-dark-3 fw-light text-sm mb-4">
+                                    {{member.team}}</div>
+                                <ul class="list-inline text-center mb-0 d-flex justify-content-between text-sm mb-0">
+                                    <li class="list-inline-item"><i class="fab fa-blogger-b me-2"></i>150</li>
+                                    <li class="list-inline-item"><i class="fas fa-code-branch me-2"></i>340</li>
+                                    <li class="list-inline-item"><i class="fab fa-gg me-2"></i>460</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                {% endfor %}
+                {% endif %}
+            </div> {% endcomment %}
+
+
+            
+
+            
+        </div>
+    </div>
+</section>
+{% endblock content %}
